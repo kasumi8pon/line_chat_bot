@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>買い物リスト</title>
+  </head>
+  <body>
+    <h1>買い物リスト</h1>
+    <%= form_with(model: @item, local: true) do |form| %>
+      <%= form.label :name, "買うもの" %>
+      <%= form.text_field :name %>
+      <%= form.submit %>
+    <% end %>
+    <% @items.each do |item| %>
+      <%= item.name %>
+      <%= link_to "買ったよ", item, method: :delete  %>
+      <br>
+    <% end %>
+  </body>
+</html>
