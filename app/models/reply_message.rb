@@ -50,6 +50,24 @@ class ReplyMessage
     when :say
       statement = keywords
       statement.join(" ")
+    when :today_npb_result
+      result = NpbResult.list(team: keywords[0])[0]
+      if result == nil
+        "今日は試合がないよ"
+      else
+        case result[:status]
+        when "結果"
+          "今日の#{result[:away_team]}と#{result[:home_team]}の試合の結果は、" +
+          "#{result[:away_score]} - #{result[:home_score]} だよ。"
+        when "試合前"
+          "今日の#{result[:away_team]}と#{result[:home_team]}の試合はまだ始まってないよ"
+        when "中止"
+          "今日の#{result[:away_team]}と#{result[:home_team]}の試合は中止だよ"
+        else
+          "今日の#{result[:away_team]}と#{result[:home_team]}の試合は、" +
+          "今#{result[:status]}で、#{result[:away_score]} - #{result[:home_score]} だよ。"
+        end
+      end
     when :good_morning
       "おはよう！"
     when :good_night
