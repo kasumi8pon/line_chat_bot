@@ -63,12 +63,9 @@ class ReceivedMessage
   end
 
   def pick_keyword_from(message)
-    case @reply_type
-    when :remind_item, :notify_item, :destroy_item, :destroy_all_item, :which, :say
-      keywords = message.split(" ")
-      keywords.shift
-      keywords.pop
-      keywords
-    end
+    keywords = message.split(" ")
+    keywords.shift
+    keywords.pop
+    keywords
   end
 end
